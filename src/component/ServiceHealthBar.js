@@ -28,7 +28,11 @@ const ServiceHealthBar = ({
       <TableCell align='left' style={{ width: '1%' }}>
         <StatusIcon
           status={cluster.status}
-          title={new Date(cluster.lastCheckTime).toString()}
+          title={
+            cluster.lastCheckTime
+              ? new Date(cluster.lastCheckTime).toString()
+              : ''
+          }
           style={{ margin: '8px 0px' }}
         />
       </TableCell>
@@ -50,7 +54,7 @@ const ServiceHealthBar = ({
                 return (
                   <StatusIcon
                     key={item.timestamp}
-                    status={item.average}
+                    status={item.value}
                     title={new Date(parseInt(item.timestamp)).toString()}
                   />
                 )
@@ -69,7 +73,11 @@ const ServiceHealthBar = ({
                   <ListItemIcon>
                     <StatusIcon
                       status={service.status}
-                      title={new Date(service.lastCheckTime).toString()}
+                      title={
+                        cluster.lastCheckTime
+                          ? new Date(cluster.lastCheckTime).toString()
+                          : ''
+                      }
                     />
                   </ListItemIcon>
                   <ListItemText
@@ -86,7 +94,7 @@ const ServiceHealthBar = ({
                       return (
                         <StatusIcon
                           key={item.timestamp}
-                          status={item.average}
+                          status={item.value}
                           title={new Date(parseInt(item.timestamp)).toString()}
                           style={{
                             width: '0.8em',
