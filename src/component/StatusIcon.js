@@ -1,7 +1,6 @@
 import React from 'react'
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 import { Tooltip } from '@material-ui/core'
-// import { SUCCESS_COLOR, FAILURE_COLOR, UNAVAILABLE_COLOR } from '../../../constants';
 
 const StatusIcon = ({ status, title, style }) => {
   let statusIconColor

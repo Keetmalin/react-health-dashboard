@@ -81,6 +81,8 @@ class Example extends Component {
 
 ## Supported Props
 
+### data
+
 The most important prop is the `data` prop. The `data` prop can be in the following format. This has been explained in detail using comments in the below JSON.
 
 ```jsx
@@ -120,7 +122,27 @@ data = [
 ]
 
 ```
+---
+### loading
 
+Accepted values are `true` and `false`. This is an optional prop, which will show a horizontal live loader as shown in the below image. This is also called a LinearProgress bar. This can be used when fetching the data required for the health dashboard.
+
+![React Health Dashboard loading view](https://github.com/keetmalin/react-health-dashboard/blob/master/readme_images/react-health-dashboard-loading.png?raw=true "React Health Dashboard loading view")
+
+```jsx
+<HealthDashboard loading={true} />
+```
+---
+### error
+
+Accepted values are Strings. This is an optional prop, which will show an error message as shown in the below image. This can be used when an error occurs during the process of fetching the data required for the health dashboard.
+
+![React Health Dashboard error view](https://github.com/keetmalin/react-health-dashboard/blob/master/readme_images/react-health-dashboard-error-message.png?raw=true "React Health Dashboard error view")
+
+```jsx
+<HealthDashboard error='An error occurred when fetching data for the Health Dashboard' />
+```
+---
 More props will be coming soon with more flexibility. If you want a feature or a prop added immediately, please create an issue in the Github Repo: https://github.com/Keetmalin/react-health-dashboard/issues
 
 
