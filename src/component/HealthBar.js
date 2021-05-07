@@ -12,11 +12,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import StatusIcon from './StatusIcon'
 
-const ServiceHealthBar = ({
-  getHealthServiceData,
-  dependentServices,
-  cluster
-}) => {
+const HealthBar = ({ component, subComponents }) => {
   const [open, setOpen] = React.useState(false, true)
 
   function handleClick() {
@@ -27,10 +23,10 @@ const ServiceHealthBar = ({
     <TableRow style={{ verticalAlign: 'top' }}>
       <TableCell align='left' style={{ width: '1%' }}>
         <StatusIcon
-          status={cluster.status}
+          status={component.status}
           title={
-            cluster.lastCheckTime
-              ? new Date(cluster.lastCheckTime).toString()
+            component.lastCheckTime
+              ? new Date(component.lastCheckTime).toString()
               : ''
           }
           style={{ margin: '8px 0px' }}
@@ -40,7 +36,7 @@ const ServiceHealthBar = ({
         <ListItem button onClick={handleClick}>
           {open ? <ExpandLess /> : <ExpandMore />}
           <ListItemText
-            primary={cluster.name}
+            primary={component.name}
             size='small'
             dense='true'
             style={{
@@ -49,8 +45,8 @@ const ServiceHealthBar = ({
             }}
           />
           <div>
-            {cluster.datapoints &&
-              cluster.datapoints.map((item) => {
+            {component.datapoints &&
+              component.datapoints.map((item) => {
                 return (
                   <StatusIcon
                     key={item.timestamp}
@@ -63,25 +59,21 @@ const ServiceHealthBar = ({
         </ListItem>
         <Collapse in={open} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
-            {dependentServices.map((service) => {
+            {subComponents.map((subComponent) => {
               return (
-                <ListItem
-                  key={service.name}
-                  button
-                  onClick={() => getHealthServiceData(service.name)}
-                >
+                <ListItem key={subComponent.name}>
                   <ListItemIcon>
                     <StatusIcon
-                      status={service.status}
+                      status={subComponent.status}
                       title={
-                        cluster.lastCheckTime
-                          ? new Date(cluster.lastCheckTime).toString()
+                        subComponent.lastCheckTime
+                          ? new Date(subComponent.lastCheckTime).toString()
                           : ''
                       }
                     />
                   </ListItemIcon>
                   <ListItemText
-                    primary={service.name}
+                    primary={subComponent.name}
                     size='small'
                     dense='true'
                     style={{
@@ -90,7 +82,7 @@ const ServiceHealthBar = ({
                     }}
                   />
                   <div>
-                    {service.datapoints.map((item) => {
+                    {subComponent.datapoints.map((item) => {
                       return (
                         <StatusIcon
                           key={item.timestamp}
@@ -111,14 +103,10 @@ const ServiceHealthBar = ({
         </Collapse>
       </TableCell>
       <TableCell align='left'>
-        {cluster.status === 1 ? 'Healthy' : 'Unhealthy'}
+        {component.status === 1 ? 'Healthy' : 'Unhealthy'}
       </TableCell>
     </TableRow>
   )
 }
 
-function mapStateToProps() {
-  return {}
-}
-
-export default ServiceHealthBar
+export default HealthBar

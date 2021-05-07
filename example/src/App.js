@@ -6,15 +6,19 @@ import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { HealthDashboard } from 'react-health-dashboard'
 import 'react-health-dashboard/dist/index.css'
 
-import {healthData } from './sampleData/HealthData';
+import { healthData } from './sampleData/HealthData'
 
 const App = () => {
-  return <React.Fragment>
-          <HealthDashboard data={healthData} />
-          <br />
-          <h3>Given below is the JSON that is used as the prop `data` for the above displayed compoenent.</h3>
-          <SyntaxHighlighter language='javascript' style={docco}>
-            {`export const healthData = [
+  return (
+    <React.Fragment>
+      <HealthDashboard data={healthData} />
+      <br />
+      <h3>
+        Given below is the JSON that is used as the prop `data` for the above
+        displayed compoenent.
+      </h3>
+      <SyntaxHighlighter language='javascript' style={docco}>
+        {`export const healthData = [
     {
       name: 'Google Cloud',
       status: 1.0,
@@ -139,8 +143,25 @@ const App = () => {
       ]
     }
   ]`}
-          </SyntaxHighlighter>
+      </SyntaxHighlighter>
+      <br />
+      <br />
+      <hr />
+      <h3>
+        Adding a loader to the health dashbaord. This can be used when fetching
+        the data required for the health dashboard.
+      </h3>
+      <HealthDashboard loading={true} />
+      <br />
+      <br />
+      <hr />
+      <h3>
+        Adding an error message in the dashbaord. This can be used when the data
+        reuiqred for the health dashboard could not be fetched.
+      </h3>
+      <HealthDashboard error='An error occurred when fetching data for the Health Dashboard' />
     </React.Fragment>
+  )
 }
 
 export default App
